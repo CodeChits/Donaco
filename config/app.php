@@ -139,6 +139,8 @@ return [
 
     'manual_payment_mode' => filter_var(env('MANUAL_PAYMENT_MODE', false), FILTER_VALIDATE_BOOL),
 
+    'manual_payment_mode_validation' => filter_var(env('MANUAL_PAYMENT_MODE_VALIDATION', false), FILTER_VALIDATE_BOOL),
+
     'empresa_name' => env('EMPRESA_NAME'),
 
     'providers' => [
@@ -172,6 +174,15 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
+    ],
+
+    'sight_engine' => [
+        'models' => env('SIGHT_ENGINE_MODELS'),
+        'api' => [
+            'url' => env('SIGHT_API_URL'),
+            'user' => env('SIGHT_API_USER'),
+            'secret' => env('SIGHT_API_SECRET'),
+        ],
     ],
 
     'aliases' => [

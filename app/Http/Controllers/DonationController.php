@@ -7,6 +7,7 @@ use App\Services\PaymentService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Repositories\ProjectRepository;
+use App\Rules\ValidateIfImageIsNsfw;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
@@ -62,7 +63,13 @@ class DonationController extends Controller
                 'value' => 'required|string|regex:/^\d+(?:,\d{2})?$/',
                 'message' => 'nullable|string|max:500',
                 'payment_method' => 'required|in:mercadopago,manual',
-                'proof_file' => 'required_if:payment_method,manual|file|mimes:pdf,png,jpg,jpeg|max:2048',
+                'proof_file' => [
+                    'required_if:payment_method,manual',
+                    'file',
+                    'mimes:pdf,png,jpg,jpeg',
+                    'max:2048',
+                    new ValidateIfImageIsNsfw(),
+                ],
             ]);
 
             // Trata o valor baseado no método de pagamento

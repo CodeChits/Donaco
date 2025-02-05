@@ -30,7 +30,6 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/donations/{donation}/edit', [AdminDonationController::class, 'edit'])->name('admin.donations.edit');
     Route::put('/donations/{donation}', [AdminDonationController::class, 'update'])->name('admin.donations.update');
     Route::delete('/donations/{donation}', [AdminDonationController::class, 'destroy'])->name('admin.donations.destroy');
-
 });
 
 Route::middleware('auth')->group(function () {
